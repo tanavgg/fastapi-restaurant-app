@@ -15,7 +15,7 @@ Decisions already taken, with the reasoning and the rejected alternatives, are i
 [`docs/adr/`](docs/adr/) — read the index before reopening one. Branch, commit and
 phase-completion conventions are in [`docs/conventions.md`](docs/conventions.md).
 
-**Current state:** Phase 0. No application code exists yet.
+**Current state:** Phase 1 — backend base setup. No application code exists yet.
 *(Update this line at every phase boundary — it is what tells a new session where the project is.)*
 
 **Actors:** `CUSTOMER` · `RESTAURANT_OWNER` · `ADMIN` · `SUPER_ADMIN`, a many-to-many in `user_roles`
@@ -167,9 +167,12 @@ Target ~80% on `services/` and `repositories/`; don't chase 100%.
   [`docs/conventions.md`](docs/conventions.md): `phase-NN-slug` / `feat/slug`, Conventional Commits
   with an imperative subject, body explaining *why*.
 - Do not add features beyond the current phase — new ideas go to the backlog, not the branch.
-- **No git-tracked file ever references `personal/` or anything inside it.** That directory is the
-  human's private working notebook (analyses, change notes, decision logs) and is git-ignored.
-  Durable content belongs in `docs/plan.md`, `docs/adr/`, or `CLAUDE.md`.
+- **No documentation or application file references `personal/` or anything inside it.** That
+  directory is the human's private working notebook (analyses, change notes, decision logs) and is
+  git-ignored, so a fresh clone does not have it — nothing a reader of this repository sees may
+  depend on it. Durable content belongs in `docs/plan.md`, `docs/adr/`, or `CLAUDE.md`.
+  The agent workflow skills in `.claude/skills/` are the one exception: they write the notebook,
+  and they create the directory on first use rather than assuming it.
 - Prefer amending `docs/plan.md` over re-deriving a settled decision in conversation.
 - Changes to git-tracked files follow the `workflow-change` skill; analysis requests follow
   `workflow-analyze`.
